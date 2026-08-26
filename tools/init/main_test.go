@@ -39,6 +39,11 @@ func TestRewrite(t *testing.T) {
 			content: "# go-cli-template\n\nA short description of go-cli-template.\n",
 			want:    "# yourtool\n\nDoes the thing.\n",
 		},
+		"owner/repo in badge URL": {
+			rel:     "README.md",
+			content: "https://img.shields.io/github/v/release/mickamy/go-cli-template",
+			want:    "https://img.shields.io/github/v/release/you/yourtool",
+		},
 		"license holder": {
 			rel:     "LICENSE",
 			content: "Copyright (c) 2026 Tetsuro Mikami\n",

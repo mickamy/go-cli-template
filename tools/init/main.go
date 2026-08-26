@@ -28,6 +28,7 @@ import (
 
 const (
 	templateModule      = "github.com/mickamy/go-cli-template"
+	templateRepo        = "mickamy/go-cli-template"
 	templateName        = "go-cli-template"
 	templateAuthor      = "Tetsuro Mikami"
 	templateYear        = "2026"
@@ -210,6 +211,10 @@ func rewrite(content, rel string, opts options) string {
 		content = strings.ReplaceAll(content, templateDescription, opts.description)
 	}
 	content = strings.ReplaceAll(content, templateModule, opts.module)
+	if repo, ok := strings.CutPrefix(opts.module, "github.com/"); ok {
+		// owner/repo appears on its own in badge URLs.
+		content = strings.ReplaceAll(content, templateRepo, repo)
+	}
 	content = strings.ReplaceAll(content, templateName, opts.name)
 
 	switch rel {
