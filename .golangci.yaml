@@ -13,7 +13,24 @@ formatters:
 
 linters:
   default: all
+  enable:
+    - deadmut
+    - pointless
   settings:
+    custom:
+      deadmut:
+        type: module
+        description: Reports mutations of range loop value copies that have no effect.
+        original-url: github.com/go-by-value/deadmut
+      pointless:
+        type: module
+        description: Reports pointers to small structs that could be values.
+        original-url: github.com/go-by-value/pointless
+        settings:
+          threshold: 256    # Copying up to 256 bytes costs about one non-inlined call
+          receivers: method # Report each method that can take a value receiver, even if a sibling method needs the pointer
+          returns: true     # Report functions whose every return is a fresh &T{} or new(T); the default, kept explicit
+          slices: true      # Off upstream as a style choice; the check is conservative, so opt in
     errcheck:
       exclude-functions:
         - fmt.Fprint
