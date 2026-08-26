@@ -14,7 +14,7 @@ This repository is a starting point for a Go command-line tool. It has no depend
 - A `version` command backed by `debug.ReadBuildInfo`, so `go install` and tagged builds report the right version without linker flags.
 - `golangci-lint` configured with every linter on, minus a documented list of exceptions.
 - CI on Linux, macOS, and Windows against the Go version in `go.mod` and the latest stable release, with actions pinned by commit.
-- Releases through goreleaser on `v*` tags: archives for six OS/arch pairs, checksums, a grouped changelog, and a Homebrew formula pushed to a tap.
+- Releases through goreleaser on `v*` tags: archives for six OS/arch pairs, checksums, a grouped changelog, and a Homebrew cask pushed to a tap.
 - Dependabot for Go modules and GitHub Actions, an `.editorconfig`, and an MIT license.
 
 ### Create a project
@@ -39,7 +39,7 @@ gh repo create you/yourtool --public --source . --push
 
 - Replace the `hello` command in `internal/cli/hello.go` with your own, and register it in the `commands` table in `internal/cli/cli.go`.
 - Update the sections below.
-- To publish to Homebrew, add a `TAP_GITHUB_TOKEN` repository secret: a token with write access to the tap repository named in `.goreleaser.yaml` (`brews.repository`). Without it, the release job fails at the Homebrew step; remove the `brews` section if you do not need it.
+- To publish to Homebrew, add a `TAP_GITHUB_TOKEN` repository secret: a token with write access to the tap repository named in `.goreleaser.yaml` (`homebrew_casks.repository`). Without it, the release job fails at the Homebrew step; remove the `homebrew_casks` section if you do not need it.
 - Cut a release by pushing a tag: `git tag -a v0.1.0 -m v0.1.0 && git push origin v0.1.0`.
 <!-- template:end -->
 
@@ -52,7 +52,7 @@ go install github.com/mickamy/go-cli-template@latest
 With Homebrew:
 
 ```sh
-brew install mickamy/tap/go-cli-template
+brew install --cask mickamy/tap/go-cli-template
 ```
 
 Prebuilt binaries are on the [releases page](https://github.com/mickamy/go-cli-template/releases).

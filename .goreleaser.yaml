@@ -31,19 +31,23 @@ archives:
 checksum:
   name_template: checksums.txt
 
-brews:
+homebrew_casks:
   - name: go-cli-template
     homepage: https://github.com/mickamy/go-cli-template
     description: A short description of go-cli-template.
-    directory: Formula
-    install: |
-      bin.install "go-cli-template"
-    test: |
-      system "#{bin}/go-cli-template", "version"
+    binaries:
+      - go-cli-template
     repository:
       owner: mickamy
       name: homebrew-tap
       token: "{{ .Env.TAP_GITHUB_TOKEN }}"
+    hooks:
+      post:
+        # The binaries are not signed; clear the quarantine flag so macOS runs them.
+        install: |
+          if OS.mac?
+            system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/go-cli-template"]
+          end
 
 changelog:
   sort: asc
