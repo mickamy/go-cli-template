@@ -55,3 +55,10 @@ jobs:
         with:
           version: "~> v2"
           args: check
+
+      - name: Verify the actions lockfile
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh extension install github/gh-actions-lock --pin v0.4.0
+          gh actions-lock --verify
