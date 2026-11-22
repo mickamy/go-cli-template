@@ -13,7 +13,7 @@ This repository is a starting point for a Go command-line tool. It has no depend
 - A `main.go` that handles Ctrl-C and SIGTERM through `context`, and an `internal/cli` package with subcommand dispatch, per-command flag sets, usage output, and exit codes (`internal/exit`), all testable through injected streams.
 - A `version` command backed by `debug.ReadBuildInfo`, so `go install` and tagged builds report the right version without linker flags.
 - `golangci-lint` configured with every linter on, minus a documented list of exceptions.
-- CI on Linux, macOS, and Windows against the Go version in `go.mod` and the latest stable release, with actions pinned by commit.
+- CI on Linux, macOS, and Windows against the Go version in `go.mod` and the latest stable release, with actions locked to commits in `.github/workflows/actions.lock` (`gh actions-lock`).
 - Releases through goreleaser on `v*` tags: archives for six OS/arch pairs, checksums, a grouped changelog, and a Homebrew cask pushed to a tap.
 - Dependabot for Go modules and GitHub Actions, an `.editorconfig`, and an MIT license.
 
